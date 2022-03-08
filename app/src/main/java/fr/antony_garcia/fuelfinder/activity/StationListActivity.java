@@ -1,8 +1,10 @@
-package fr.antony_garcia.opendata;
+package fr.antony_garcia.fuelfinder.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import fr.antony_garcia.fuelfinder.R;
 
 public class StationListActivity extends AppCompatActivity {
 

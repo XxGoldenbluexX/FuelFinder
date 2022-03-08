@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.antony_garcia.opendata">
+    package="fr.antony_garcia.fuelfinder">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FuelFinder">
-        <activity android:name=".StationListActivity">
+        <activity android:name="fr.antony_garcia.fuelfinder.activity.StationListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

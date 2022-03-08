@@ -1,4 +1,4 @@
-package fr.antony_garcia.opendata;
+package fr.antony_garcia.fuelfinder;
 
 import org.junit.Test;
 
