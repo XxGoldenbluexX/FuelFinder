@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FuelFinder</string>
+    <string name="search_button">Chercher</string>
 </resources>
