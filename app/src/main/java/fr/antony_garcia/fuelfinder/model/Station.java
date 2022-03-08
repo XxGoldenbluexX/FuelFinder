@@ -1,4 +1,4 @@
-package fr.antony_garcia.fuelfinder;
+package fr.antony_garcia.fuelfinder.model;
 
 import java.io.Serializable;
 
