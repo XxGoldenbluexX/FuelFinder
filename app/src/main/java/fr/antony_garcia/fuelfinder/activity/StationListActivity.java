@@ -38,7 +38,7 @@ public class StationListActivity extends AppCompatActivity {
         //param RecyclerView
         rv_stationList.setAdapter(stationAdapter);
         rv_stationList.setLayoutManager(new LinearLayoutManager(this));
-        rv_stationList.addOnScrollListener();
+        //TODO rv_stationList.addOnScrollListener();
         //Handle events
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
