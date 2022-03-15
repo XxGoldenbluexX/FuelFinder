@@ -18,10 +18,11 @@ public class Station implements Serializable {
     public Station(JSONObject obj){
         try {
             JSONObject fields = obj.getJSONObject("fields");
-            place = fields.has("adress")?fields.getString("address"):"";
+            place = fields.has("address")?fields.getString("address"):"";
             city = fields.has("city")?fields.getString("city"):"";
             brand = fields.has("brand")?fields.getString("brand"):"";
-            price = fields.has("price")?fields.getString("price"):"";
+            String fld = Carburant.GAZOIL.getField();
+            price = fields.has(fld)?fields.getString(fld):"";
         } catch (JSONException e) {
             e.printStackTrace();
         }

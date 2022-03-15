@@ -60,7 +60,6 @@ public class SeekStationsTask extends AsyncTask<String,Void, List<Station>> {
     @Override
     protected void onPostExecute(List<Station> stations) {
         super.onPostExecute(stations);
-        liste.clear();
         liste.addAll(stations);
         adapter.notifyDataSetChanged();
     }
