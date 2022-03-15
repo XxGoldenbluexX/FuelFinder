@@ -1,5 +1,6 @@
 https://clarolineconnect.univ-lyon1.fr/resource/open/file/6825066
 https://public.opendatasoft.com/explore/?sort=modified
+https://public.opendatasoft.com/explore/dataset/prix_des_carburants_j_7/table/?sort=update
 
 Chercher le carburant selon une query
 L'afficher
