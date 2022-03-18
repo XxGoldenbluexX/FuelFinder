@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +35,10 @@ public class StationListActivity extends AppCompatActivity {
         setContentView(R.layout.stationlist_activity);
         //ActionBar
         setSupportActionBar(findViewById(R.id.sla_toolbar));
+        AppBarConfiguration appBarConfiguration =
+                new AppBarConfiguration.Builder(NavControllernavController.getGraph())
+                        .setOpenableLayout(R.id.sla_nv_drawer)
+                        .build();
         //Get elements from the layout
         btn_submit = findViewById(R.id.btn_search);
         et_query = findViewById(R.id.et_query);
