@@ -31,6 +31,8 @@ public class StationListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stationlist_activity);
+        //ActionBar
+        setSupportActionBar(findViewById(R.id.sla_toolbar));
         //Get elements from the layout
         btn_submit = findViewById(R.id.btn_search);
         et_query = findViewById(R.id.et_query);

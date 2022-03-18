@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.StationListActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/sla_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
     <EditText
         android:id="@+id/et_query"
         android:layout_width="wrap_content"
@@ -15,8 +28,9 @@
         android:ems="10"
         android:hint="@string/query_hint"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sla_toolbar"
         tools:text="Query" />
 
     <Button
@@ -27,7 +41,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/search_button"
         app:layout_constraintStart_toEndOf="@+id/et_query"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/sla_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_stationList"
