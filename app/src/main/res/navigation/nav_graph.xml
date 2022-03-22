@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/stationListActivity">
 
+    <activity
+        android:id="@+id/stationListActivity"
+        android:name="fr.antony_garcia.fuelfinder.activity.StationListActivity"
+        android:label="stationlist_activity"
+        tools:layout="@layout/stationlist_fragment" />
 </navigation>
