@@ -5,4 +5,10 @@
     <string name="nav_open">Ouvrir</string>
     <string name="nav_close">Fermer</string>
     <string name="stationList">Liste des stations</string>
+    <string name="stationMap">Carte des stations</string>
+    <string name="stationDetail">Detail de la station</string>
+    <string name="nav_liste">Liste des stations</string>
+    <string name="nav_map">Carte</string>
+    <string name="nav_exit">Quitter</string>
+    <string name="me">Moi</string>
 </resources>

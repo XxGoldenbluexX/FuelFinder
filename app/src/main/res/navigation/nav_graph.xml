@@ -11,4 +11,12 @@
         android:name="fr.antony_garcia.fuelfinder.fragment.StationListFragment"
         android:label="@string/stationList"
         tools:layout="@layout/stationlist_fragment" />
+    <fragment
+        android:id="@+id/stationDetailFragment"
+        android:name="fr.antony_garcia.fuelfinder.fragment.StationDetailFragment"
+        android:label="@string/stationDetail" />
+    <fragment
+        android:id="@+id/stationMapFragment"
+        android:name="fr.antony_garcia.fuelfinder.fragment.StationMapFragment"
+        android:label="@string/stationMap" />
 </navigation>

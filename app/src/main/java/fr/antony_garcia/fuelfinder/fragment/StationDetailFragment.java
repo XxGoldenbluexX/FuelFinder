@@ -61,7 +61,7 @@ public class StationDetailFragment extends Fragment {
                 lastQuery = et_query.getText().toString();
                 new SeekStationsTask(liste,stationAdapter).execute(
                         "https://public.opendatasoft.com/api/records/1.0/search/?dataset=prix_des_carburants_j_7&q=&sort=-price_gazole&rows=10&q="+lastQuery
-                );//TODO change query with the EditText's value
+                );
             }
         });
     }
