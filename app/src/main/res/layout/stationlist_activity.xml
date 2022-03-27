@@ -4,12 +4,22 @@
     android:id="@+id/sla_dl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!--<androidx.appcompat.widget.Toolbar
+        android:id="@+id/sla_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/sla_nv_drawer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true" />
+        android:fitsSystemWindows="true"
+        app:menu="@menu/menu_drawer"/>
     <androidx.fragment.app.FragmentContainerView
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:id="@+id/nav_host_fragment"

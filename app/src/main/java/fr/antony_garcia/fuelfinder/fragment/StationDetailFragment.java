@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,7 @@ import fr.antony_garcia.fuelfinder.StationAdapter;
 import fr.antony_garcia.fuelfinder.model.Station;
 import fr.antony_garcia.fuelfinder.task.SeekStationsTask;
 
-public class StationListFragment extends Fragment {
+public class StationDetailFragment extends Fragment {
 
     private Button btn_submit;
     private EditText et_query;
@@ -28,12 +27,12 @@ public class StationListFragment extends Fragment {
     private final List<Station> liste = new ArrayList<>();
     private String lastQuery = "";
 
-    public StationListFragment(){
+    public StationDetailFragment(){
         super(R.layout.stationlist_fragment);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Get elements from the layout
         btn_submit = view.findViewById(R.id.btn_search);

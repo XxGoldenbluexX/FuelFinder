@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/stationListActivity">
+    android:label="@string/stationList"
+    app:startDestination="@id/stationListFragment">
 
-    <activity
-        android:id="@+id/stationListActivity"
-        android:name="fr.antony_garcia.fuelfinder.activity.StationListActivity"
-        android:label="stationlist_activity"
+    <fragment
+        android:id="@+id/stationListFragment"
+        android:name="fr.antony_garcia.fuelfinder.fragment.StationListFragment"
+        android:label="@string/stationList"
         tools:layout="@layout/stationlist_fragment" />
 </navigation>

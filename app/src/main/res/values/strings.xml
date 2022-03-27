@@ -2,4 +2,7 @@
     <string name="app_name">FuelFinder</string>
     <string name="search_button">Chercher</string>
     <string name="query_hint">Ville, Adresse, Code postal, Carburant</string>
+    <string name="nav_open">Ouvrir</string>
+    <string name="nav_close">Fermer</string>
+    <string name="stationList">Liste des stations</string>
 </resources>
