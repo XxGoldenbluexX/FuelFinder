@@ -1,17 +1,21 @@
 package fr.antony_garcia.fuelfinder.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +26,7 @@ import fr.antony_garcia.fuelfinder.StationAdapter;
 import fr.antony_garcia.fuelfinder.model.Station;
 import fr.antony_garcia.fuelfinder.task.SeekStationsTask;
 
-public class StationMapFragment extends Fragment {
+public class StationMapFragment extends Fragment implements OnMapReadyCallback {
 
     MapView mapView;
 
@@ -37,6 +41,12 @@ public class StationMapFragment extends Fragment {
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         MapsInitializer.initialize(mapView.getContext());
+        mapView.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        //TODO METTRE EN PLACE LA CARTE
     }
 
     @Override
