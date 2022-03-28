@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -20,15 +22,18 @@ public class StationAdapter extends RecyclerView.Adapter {
 
     private final LayoutInflater inflater;
 
-    public StationAdapter(Context context, List<Station> liste){
+    RecyclerViewItemClickListener<Station> itemClickListener;
+
+    public StationAdapter(Context context, List<Station> liste, RecyclerViewItemClickListener<Station> itemClickListener) {
         this.context = context;
         this.liste = liste;
+        this.itemClickListener = itemClickListener;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new StationItemHolder(inflater.inflate(R.layout.station_listitem, parent,false));
+        return new StationItemHolder(inflater.inflate(R.layout.station_listitem, parent,false),itemClickListener);
     }
 
     @Override
@@ -49,9 +54,13 @@ public class StationAdapter extends RecyclerView.Adapter {
         private final TextView sli_city;
         private final TextView sli_brand;
         private final TextView sli_price;
+        private final View root;
+        private RecyclerViewItemClickListener<Station> itemClickListener;
 
-        public StationItemHolder(View itemView) {
+        public StationItemHolder(View itemView, RecyclerViewItemClickListener<Station> itemClickListener) {
             super(itemView);
+            root = itemView;
+            this.itemClickListener = itemClickListener;
             sli_place = itemView.findViewById(R.id.sli_place);
             sli_brand = itemView.findViewById(R.id.sli_brand);
             sli_price = itemView.findViewById(R.id.sli_price);
@@ -61,8 +70,14 @@ public class StationAdapter extends RecyclerView.Adapter {
         public void load(Station s){
             sli_place.setText(s.getPlace());
             sli_brand.setText(s.getBrand());
-            sli_price.setText(s.getPrice());
+            sli_price.setText(s.getPriceGazole());
             sli_city.setText(s.getCity());
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemClickListener.onItemClick(s);
+                }
+            });
         }
     }
 }

@@ -1,25 +1,33 @@
 package fr.antony_garcia.fuelfinder.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.antony_garcia.fuelfinder.EndlessRecyclerViewScrollListener;
 import fr.antony_garcia.fuelfinder.R;
+import fr.antony_garcia.fuelfinder.RecyclerViewItemClickListener;
 import fr.antony_garcia.fuelfinder.StationAdapter;
 import fr.antony_garcia.fuelfinder.model.Station;
 import fr.antony_garcia.fuelfinder.task.SeekStationsTask;
 
-public class StationListFragment extends Fragment {
+public class StationListFragment extends Fragment implements RecyclerViewItemClickListener<Station> {
 
     private Button btn_submit;
     private EditText et_query;
@@ -40,7 +48,7 @@ public class StationListFragment extends Fragment {
         et_query = view.findViewById(R.id.et_query);
         rv_stationList = view.findViewById(R.id.rv_stationList);
         //Create adapter
-        stationAdapter = new StationAdapter(getActivity(),liste);
+        stationAdapter = new StationAdapter(getActivity(),liste,this);
         //param RecyclerView
         rv_stationList.setAdapter(stationAdapter);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -65,5 +73,13 @@ public class StationListFragment extends Fragment {
                 );
             }
         });
+    }
+
+    @Override
+    public void onItemClick(Station station) {
+        NavController navController = Navigation.findNavController(rv_stationList);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("station",station);
+        navController.navigate(R.id.stationDetailFragment,bundle);
     }
 }

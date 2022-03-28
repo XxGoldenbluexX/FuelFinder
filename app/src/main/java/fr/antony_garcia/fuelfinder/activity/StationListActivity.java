@@ -3,6 +3,7 @@ package fr.antony_garcia.fuelfinder.activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -11,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,7 +21,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import fr.antony_garcia.fuelfinder.R;
+import fr.antony_garcia.fuelfinder.fragment.StationDetailFragment;
+import fr.antony_garcia.fuelfinder.fragment.StationMapFragment;
+import fr.antony_garcia.fuelfinder.model.Station;
 
 public class StationListActivity extends AppCompatActivity {
 
@@ -53,9 +62,17 @@ public class StationListActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.nav_liste:
                             navController.navigate(R.id.stationListFragment);
+                            drawer.closeDrawer(Gravity.LEFT);
                             return true;
                         case R.id.nav_map:
                             navController.navigate(R.id.stationMapFragment);
+                            drawer.closeDrawer(Gravity.LEFT);
+                            return true;
+                        case R.id.nav_back:
+                            if (navController.popBackStack())
+                            {
+                                drawer.closeDrawer(Gravity.LEFT);
+                            };
                             return true;
                         case R.id.nav_exit:
                             finishAndRemoveTask();

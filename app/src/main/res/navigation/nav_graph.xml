@@ -10,13 +10,30 @@
         android:id="@+id/stationListFragment"
         android:name="fr.antony_garcia.fuelfinder.fragment.StationListFragment"
         android:label="@string/stationList"
-        tools:layout="@layout/stationlist_fragment" />
+        tools:layout="@layout/stationlist_fragment" >
+        <action
+            android:id="@+id/action_stationListFragment_to_stationDetailFragment"
+            app:destination="@id/stationDetailFragment" />
+        <action
+            android:id="@+id/action_stationListFragment_to_stationMapFragment2"
+            app:destination="@id/stationMapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/stationDetailFragment"
         android:name="fr.antony_garcia.fuelfinder.fragment.StationDetailFragment"
-        android:label="@string/stationDetail" />
+        android:label="@string/stationDetail" >
+        <action
+            android:id="@+id/action_stationDetailFragment_to_stationListFragment"
+            app:destination="@id/stationListFragment"
+            app:popUpTo="@id/stationListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/stationMapFragment"
         android:name="fr.antony_garcia.fuelfinder.fragment.StationMapFragment"
-        android:label="@string/stationMap" />
+        android:label="@string/stationMap" >
+        <action
+            android:id="@+id/action_stationMapFragment_to_stationListFragment2"
+            app:destination="@id/stationListFragment"
+            app:popUpTo="@id/stationListFragment" />
+    </fragment>
 </navigation>

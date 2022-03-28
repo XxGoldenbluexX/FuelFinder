@@ -17,8 +17,8 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAtdT-w-UJ8zMa4H4D0gYnTOFoJnXFuDgU"
-            /><!--NOT SAFE-->
+            android:value="${GOOGLE_MAPS_API_KEY}"
+            />
     </application>
 
 </manifest>

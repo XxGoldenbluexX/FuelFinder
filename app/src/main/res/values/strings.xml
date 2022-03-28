@@ -11,4 +11,8 @@
     <string name="nav_map">Carte</string>
     <string name="nav_exit">Quitter</string>
     <string name="me">Moi</string>
+    <string name="gazole">Gasoil</string>
+    <string name="sp98">Sans-plomb 98</string>
+    <string name="e85">Ethanol 85</string>
+    <string name="nav_back">Retour</string>
 </resources>

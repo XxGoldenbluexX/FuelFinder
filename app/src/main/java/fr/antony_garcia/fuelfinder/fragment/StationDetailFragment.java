@@ -1,15 +1,25 @@
 package fr.antony_garcia.fuelfinder.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import fr.antony_garcia.fuelfinder.EndlessRecyclerViewScrollListener;
@@ -20,49 +30,54 @@ import fr.antony_garcia.fuelfinder.task.SeekStationsTask;
 
 public class StationDetailFragment extends Fragment {
 
-    private Button btn_submit;
-    private EditText et_query;
-    private RecyclerView rv_stationList;
-    private StationAdapter stationAdapter;
-    private final List<Station> liste = new ArrayList<>();
-    private String lastQuery = "";
+    private TextView tv_place;//adresse
+    private TextView tv_city;
+    private TextView tv_brand;
+    private TextView tv_gazole;
+    private TextView tv_e85;
+    private TextView tv_sp98;
+    private TextView tv_last_update;
+
+    private Station station;
 
     public StationDetailFragment(){
-        super(R.layout.stationlist_fragment);
+        super(R.layout.stationdetail_fragment);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Get elements from the layout
-        btn_submit = view.findViewById(R.id.btn_search);
-        et_query = view.findViewById(R.id.et_query);
-        rv_stationList = view.findViewById(R.id.rv_stationList);
-        //Create adapter
-        stationAdapter = new StationAdapter(getActivity(),liste);
-        //param RecyclerView
-        rv_stationList.setAdapter(stationAdapter);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        rv_stationList.setLayoutManager(llm);
-        rv_stationList.addOnScrollListener(new EndlessRecyclerViewScrollListener(llm) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                new SeekStationsTask(liste,stationAdapter).execute(
-                        "https://public.opendatasoft.com/api/records/1.0/search/?dataset=prix_des_carburants_j_7&sort=-price_gazole&rows=10&start="+10*page+"&q="+lastQuery
-                );
+        tv_place = view.findViewById(R.id.tv_sd_place);
+        tv_city = view.findViewById(R.id.tv_sd_city);
+        tv_brand = view.findViewById(R.id.tv_sd_brand);
+        tv_gazole = view.findViewById(R.id.tv_sd_gazole);
+        tv_e85 = view.findViewById(R.id.tv_sd_e85);
+        tv_sp98 = view.findViewById(R.id.tv_sd_sp98);
+        tv_last_update = view.findViewById(R.id.tv_sd_last_update);
+        //Retrieve station
+        Serializable o = getArguments().getSerializable("station");
+        if (o instanceof Station){
+            station = (Station) o;
+        }
+        //show values on fields
+        if (station!=null){
+            tv_place.setText(station.getPlace());
+            tv_city.setText(station.getCity());
+            tv_brand.setText(station.getBrand());
+            tv_gazole.setText(station.getPriceGazole());
+            tv_e85.setText(station.getPriceE85());
+            tv_sp98.setText(station.getPrice_sp98());
+
+            try {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+                Date date = null;
+                date = formatter.parse(station.getLastUpdate());
+                formatter = new SimpleDateFormat("dd/MM/yyyy");
+                tv_last_update.setText(formatter.format(date));
+            } catch (ParseException e) {
+                tv_last_update.setText("Unknown");
             }
-        });
-        //Handle events
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                liste.clear();
-                stationAdapter.notifyDataSetChanged();
-                lastQuery = et_query.getText().toString();
-                new SeekStationsTask(liste,stationAdapter).execute(
-                        "https://public.opendatasoft.com/api/records/1.0/search/?dataset=prix_des_carburants_j_7&q=&sort=-price_gazole&rows=10&q="+lastQuery
-                );
-            }
-        });
+        }
     }
 }
