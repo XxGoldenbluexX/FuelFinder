@@ -1,5 +1,6 @@
 package fr.antony_garcia.fuelfinder.model;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,6 +22,10 @@ public class Station implements Serializable {
 
     private String last_update = "";
 
+    private double latitude = 0;
+
+    private double longitude = 0;
+
     public Station(JSONObject obj){
         try {
             JSONObject fields = obj.getJSONObject("fields");
@@ -31,6 +36,10 @@ public class Station implements Serializable {
             price_e85 = fields.has("price_e85")?fields.getString("price_e85"):"";
             price_sp98 = fields.has("price_sp98")?fields.getString("price_sp98"):"";
             last_update = fields.has("update")?fields.getString("update"):"";
+            JSONObject geometry = obj.getJSONObject("geometry");
+            JSONArray coordinates = geometry.getJSONArray("coordinates");
+            latitude = coordinates.getDouble(1);
+            longitude = coordinates.getDouble(0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -62,5 +71,13 @@ public class Station implements Serializable {
 
     public String getLastUpdate(){
         return last_update;
+    }
+
+    public double getLatitude(){
+        return latitude;
+    }
+
+    public double getLongitude(){
+        return longitude;
     }
 }

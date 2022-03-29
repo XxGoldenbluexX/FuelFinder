@@ -1,32 +1,21 @@
 package fr.antony_garcia.fuelfinder.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import fr.antony_garcia.fuelfinder.EndlessRecyclerViewScrollListener;
 import fr.antony_garcia.fuelfinder.R;
-import fr.antony_garcia.fuelfinder.StationAdapter;
 import fr.antony_garcia.fuelfinder.model.Station;
-import fr.antony_garcia.fuelfinder.task.SeekStationsTask;
 
 public class StationDetailFragment extends Fragment {
 
@@ -37,6 +26,8 @@ public class StationDetailFragment extends Fragment {
     private TextView tv_e85;
     private TextView tv_sp98;
     private TextView tv_last_update;
+    private Button btn_viewOnMap;
+    private View root;
 
     private Station station;
 
@@ -55,6 +46,8 @@ public class StationDetailFragment extends Fragment {
         tv_e85 = view.findViewById(R.id.tv_sd_e85);
         tv_sp98 = view.findViewById(R.id.tv_sd_sp98);
         tv_last_update = view.findViewById(R.id.tv_sd_last_update);
+        btn_viewOnMap = view.findViewById(R.id.btn_viewOnMap);
+        root = view;
         //Retrieve station
         Serializable o = getArguments().getSerializable("station");
         if (o instanceof Station){
@@ -78,6 +71,20 @@ public class StationDetailFragment extends Fragment {
             } catch (ParseException e) {
                 tv_last_update.setText("Unknown");
             }
+        }
+        //Button view on map
+        if (station!=null){
+            btn_viewOnMap.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (root!=null) {
+                        NavController navController = Navigation.findNavController(root);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("station",station);
+                        navController.navigate(R.id.stationMapFragment,bundle);
+                    }
+                }
+            });
         }
     }
 }

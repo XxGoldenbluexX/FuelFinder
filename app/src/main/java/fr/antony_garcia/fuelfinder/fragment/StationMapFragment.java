@@ -1,34 +1,29 @@
 package fr.antony_garcia.fuelfinder.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-import fr.antony_garcia.fuelfinder.EndlessRecyclerViewScrollListener;
 import fr.antony_garcia.fuelfinder.R;
-import fr.antony_garcia.fuelfinder.StationAdapter;
 import fr.antony_garcia.fuelfinder.model.Station;
-import fr.antony_garcia.fuelfinder.task.SeekStationsTask;
 
 public class StationMapFragment extends Fragment implements OnMapReadyCallback {
 
     MapView mapView;
+
+    Station station;
 
     public StationMapFragment(){
         super(R.layout.stationmap_fragment);
@@ -42,11 +37,21 @@ public class StationMapFragment extends Fragment implements OnMapReadyCallback {
         mapView.onCreate(savedInstanceState);
         MapsInitializer.initialize(mapView.getContext());
         mapView.getMapAsync(this);
+        //Get station
+        Serializable o = getArguments().getSerializable("station");
+        if (o instanceof Station){
+            station = (Station)o;
+        }
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        //TODO METTRE EN PLACE LA CARTE
+        if (station!=null) {
+            LatLng coord = new LatLng(station.getLatitude(), station.getLongitude());
+            googleMap.addMarker(new MarkerOptions().position(coord));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coord,12f));
+        }
+
     }
 
     @Override
