@@ -1,21 +1,21 @@
 package fr.antony_garcia.fuelfinder.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONObject;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,12 +65,17 @@ public class StationListFragment extends Fragment implements RecyclerViewItemCli
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                liste.clear();
-                stationAdapter.notifyDataSetChanged();
-                lastQuery = et_query.getText().toString();
-                new SeekStationsTask(liste,stationAdapter).execute(
-                        "https://public.opendatasoft.com/api/records/1.0/search/?dataset=prix_des_carburants_j_7&q=&sort=-price_gazole&rows=10&q="+lastQuery
-                );
+                ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
+                    liste.clear();
+                    stationAdapter.notifyDataSetChanged();
+                    lastQuery = et_query.getText().toString();
+                    new SeekStationsTask(liste, stationAdapter).execute(
+                            "https://public.opendatasoft.com/api/records/1.0/search/?dataset=prix_des_carburants_j_7&q=&sort=-price_gazole&rows=10&q=" + lastQuery
+                    );
+                }else{
+                    Snackbar.make(view,R.string.noInternet,Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
     }

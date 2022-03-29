@@ -16,4 +16,5 @@
     <string name="e85">Ethanol 85</string>
     <string name="nav_back">Retour</string>
     <string name="viewOnMap">Voir sur la carte</string>
+    <string name="noInternet">Aucune connection internet</string>
 </resources>
